@@ -65,6 +65,7 @@ public class Analysis {
         JSONArray components = (JSONArray)json.get("components");
         JSONArray connections = (JSONArray)json.get("connections");
 
+        ArrayList<Double> arealist = new ArrayList<>();
         ArrayList<Double> dimlist = new ArrayList<>();
         ArrayList<Double> aspectratiolist = new ArrayList<>();
         Component componenttoadd;
@@ -76,7 +77,7 @@ public class Analysis {
             undirectednetlist.addVertex(componenttoadd);
             directednetlist.addVertex(componenttoadd);
             componenthashmap.put(componenttoadd.getid(), componenttoadd);
-
+            arealist.add((double)componenttoadd.getXSpan()*(double)componenttoadd.getYSpan());
             dimlist.add((double)componenttoadd.getXSpan());
             dimlist.add((double)componenttoadd.getYSpan());
             if(componenttoadd.getXSpan()!=0 && componenttoadd.getYSpan()!=0){
@@ -97,7 +98,15 @@ public class Analysis {
         }
         double averageaspectratio = StatUtils.mean(array);
 
+        array = new double[aspectratiolist.size()];
+        for (int i=0; i<aspectratiolist.size() ; i++){
+            array[i] = arealist.get(i);
+        }
+
+        double averagearea = StatUtils.mean(array);
         try {
+            writer.append(",");
+            writer.append(Double.toString(averagearea));
             writer.append(",");
             writer.append(Double.toString(averagedimension));
             writer.append(",");
@@ -122,6 +131,8 @@ public class Analysis {
         writer.append("connections");
         writer.append(",");
         writer.append("max_connections");
+        writer.append(",");
+        writer.append("avg_area");
         writer.append(",");
         writer.append("avg_dimension");
         writer.append(",");

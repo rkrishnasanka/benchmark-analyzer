@@ -15,7 +15,11 @@ public class Component{
         this.id = (String) object.get("id");
         JSONObject params = (JSONObject) object.get("params");
         this.xspan = ((Long)params.get("width")).intValue();
-        this.yspan = ((Long)params.get("length")).intValue();
+        try {
+            this.yspan = ((Long) params.get("length")).intValue();
+        }catch (NullPointerException e){
+            this.yspan = ((Long) params.get("height")).intValue();
+        }
     }
 
     public Integer getXSpan() {

@@ -9,17 +9,19 @@ public class Main {
 
     public static void main(String[] argv){
 
-        String folders[] = new String[4];
+        String folders[] = new String[5];
         folders[0] = "/Users/krishna/Desktop/benchmarks/synthetic";
         folders[1] = "/Users/krishna/Desktop/benchmarks/realistic";
         folders[2] = "/Users/krishna/Desktop/benchmarks/chthesis";
         folders[3] = "/Users/krishna/Desktop/benchmarks/grid";
+        folders[4] = "/Users/krishna/Desktop/scribe";
 
-        String sets[] = new String[4];
+        String sets[] = new String[5];
         sets[0] = "Synthetic";
         sets[1] = "Realistic";
         sets[2] = "Huang_Thesis";
         sets[3] = "Grid";
+        sets[4] = "scribe";
 
 
         FileWriter writer = null;
